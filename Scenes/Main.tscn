@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://ctu255nv50ygx"]
+
+[ext_resource type="Script" uid="uid://dta4aq6olg0qp" path="res://Scripts/Core/Main.cs" id="1_r150o"]
+[ext_resource type="Script" uid="uid://cl86a7pcion8c" path="res://Scripts/UI/BoardRenderer.cs" id="2_kln2b"]
+[ext_resource type="Script" uid="uid://cw8htbq3jb3ib" path="res://Scripts/Core/TurnController.cs" id="3_rgh2o"]
+[ext_resource type="Texture2D" uid="uid://bs4rm6kpq7m60" path="res://Assets/Sprites/FloorTexture2.png" id="3_v1gob"]
+[ext_resource type="Texture2D" uid="uid://cc640slf5wlmt" path="res://Assets/Sprites/wallStone.png" id="4_jw32o"]
+[ext_resource type="PackedScene" uid="uid://cwqqmorw87bq7" path="res://Scenes/PlayerBot.tscn" id="4_rgh2o"]
+[ext_resource type="PackedScene" uid="uid://doq55tw4m0hmv" path="res://Scenes/EnemyBot.tscn" id="6_jw32o"]
+
+[node name="Main" type="Node2D" unique_id=1580367723]
+script = ExtResource("1_r150o")
+
+[node name="BoardRenderer" type="Node2D" parent="." unique_id=288415835]
+z_as_relative = false
+script = ExtResource("2_kln2b")
+FloorTexture = ExtResource("3_v1gob")
+WallTexture = ExtResource("4_jw32o")
+PlayerBotScene = ExtResource("4_rgh2o")
+EnemyBotScene = ExtResource("6_jw32o")
+
+[node name="TurnController" type="Node" parent="." unique_id=986296874]
+script = ExtResource("3_rgh2o")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1629586814]

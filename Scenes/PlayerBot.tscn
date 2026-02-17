@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://cwqqmorw87bq7"]
+
+[ext_resource type="Script" uid="uid://b0eust1cqxrj6" path="res://Scripts/UI/PlayerBotView.cs" id="1_t5ewc"]
+[ext_resource type="Texture2D" uid="uid://b3k6ag21d2djr" path="res://Assets/Sprites/Bots/BotBase.png" id="2_3rl4r"]
+[ext_resource type="Texture2D" uid="uid://t0d0mcmtx5p8" path="res://Assets/Sprites/Bots/BotWheels.png" id="3_8vsqv"]
+[ext_resource type="Texture2D" uid="uid://cllpkasng4h01" path="res://Assets/Sprites/Bots/BotWeapon_Left.png" id="4_5fjis"]
+
+[node name="PlayerBot" type="Node2D" unique_id=1505841352]
+script = ExtResource("1_t5ewc")
+BaseTexture = ExtResource("2_3rl4r")
+LegsWheelsTexture = ExtResource("3_8vsqv")
+ArmLWeaponTexture = ExtResource("4_5fjis")
+SpriteScale = 1.0
+
+[node name="Base" type="Sprite2D" parent="." unique_id=133901206]
+
+[node name="Legs" type="Sprite2D" parent="." unique_id=85620336]
+
+[node name="ArmL" type="Sprite2D" parent="." unique_id=328048305]
+
+[node name="ArmR" type="Sprite2D" parent="." unique_id=675268267]
+
+[node name="Module" type="Sprite2D" parent="." unique_id=1280129450]

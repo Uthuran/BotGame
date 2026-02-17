@@ -1,0 +1,13 @@
+.godot/
+.mono/
+.import/
+**/bin/
+**/obj/
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.csproj.user
+Thumbs.db
+.DS_Store
