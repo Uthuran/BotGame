@@ -1,13 +1,23 @@
+# Godot 4.x
 .godot/
 .mono/
 .import/
+
+# .NET build outputs
 **/bin/
 **/obj/
+
+# IDEs
 .vs/
 .vscode/
 .idea/
 *.suo
 *.user
 *.csproj.user
+
+# Godot metadata noise
+*.uid
+
+# OS junk
 Thumbs.db
 .DS_Store
