@@ -60,9 +60,9 @@ namespace BotGame.Core
 			GridPosition? move = k.Keycode switch
 			{
 				Key.W or Key.Up => new GridPosition(0, -1),
-				Key.S or Key.Down => new GridPosition(0,  1),
+				Key.S or Key.Down => new GridPosition(0, 1),
 				Key.A or Key.Left => new GridPosition(-1, 0),
-				Key.D or Key.Right => new GridPosition( 1, 0),
+				Key.D or Key.Right => new GridPosition(1, 0),
 				_ => null
 			};
 
