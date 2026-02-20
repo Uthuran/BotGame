@@ -1,4 +1,4 @@
-namespace BotGame.World
+namespace OdiGame.World
 {
 	public readonly struct GridPosition
 	{

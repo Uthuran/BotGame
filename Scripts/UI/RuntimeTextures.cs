@@ -1,6 +1,6 @@
 using Godot;
 
-namespace BotGame.UI
+namespace OdiGame.UI
 {
 	public static class RuntimeTextures
 	{
