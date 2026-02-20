@@ -1,6 +1,6 @@
 using Godot;
 
-namespace OdiGame.UI
+namespace BotGame.UI
 {
 	/// <summary>
 	/// Layered sprite compositor for a robot.

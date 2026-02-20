@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://botgame/schemas/enemies.schema.json",
+  "title": "Enemy Definitions",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "name", "ai", "loadout"],
+    "properties": {
+      "id": { "type": "string", "pattern": "^[a-z0-9_\\-]+$" },
+      "name": { "type": "string", "minLength": 1 },
+      "ai": { "type": "string", "enum": ["Chase", "Patrol", "Guard"] },
+      "salvageDropRate": { "type": "number", "minimum": 0, "maximum": 1 },
+      "loadout": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["CPU", "Power", "Move", "ArmL", "ArmR", "Modules"],
+        "properties": {
+          "CPU": { "type": "string" },
+          "Power": { "type": "string" },
+          "Move": { "type": "string" },
+          "ArmL": { "type": ["string", "null"] },
+          "ArmR": { "type": ["string", "null"] },
+          "Modules": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    }
+  }
+}

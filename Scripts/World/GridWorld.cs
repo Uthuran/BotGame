@@ -1,6 +1,6 @@
 using System;
 
-namespace OdiGame.World
+namespace BotGame.World
 {
 	public class GridWorld
 	{

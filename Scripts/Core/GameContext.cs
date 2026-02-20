@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 
-namespace OdiGame.Core
+namespace BotGame.Core
 {
 	public class GameContext
 	{
-		public OdiGame.World.GridWorld Map { get; }
+		public BotGame.World.GridWorld Map { get; }
 		public List<Actor> Actors { get; }
 
-		public GameContext(OdiGame.World.GridWorld map, List<Actor> actors)
+		public GameContext(BotGame.World.GridWorld map, List<Actor> actors)
 		{
 			Map = map;
 			Actors = actors;
