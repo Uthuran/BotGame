@@ -1,6 +1,6 @@
-using OdiGame.World;
+using BotGame.World;
 
-namespace OdiGame.Core
+namespace BotGame.Core
 {
 	public abstract class Actor
 	{

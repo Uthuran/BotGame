@@ -1,17 +1,18 @@
 using Godot;
 using System.Collections.Generic;
-using OdiGame.AI;
-using OdiGame.UI;
-using OdiGame.World;
+using BotGame.AI;
+using BotGame.UI;
+using BotGame.World;
 
-namespace OdiGame.Core
+namespace BotGame.Core
 {
 	public partial class TurnController : Node
 	{
 		[Export] public int MapWidth = 12;
 		[Export] public int MapHeight = 8;
+		[Export] public int Seed = 0;
 
-		private OdiGame.World.GridWorld _map = default!;
+		private BotGame.World.GridWorld _map = default!;
 		private GameContext _ctx = default!;
 		private PlayerActor _player = default!;
 		private List<Actor> _actors = default!;
@@ -21,19 +22,19 @@ namespace OdiGame.Core
 		{
 			_renderer = GetParent().GetNode<BoardRenderer>("BoardRenderer");
 
-			_map = new OdiGame.World.GridWorld(MapWidth, MapHeight);
+			_map = new BotGame.World.GridWorld(MapWidth, MapHeight);
 			// Simple wall strip with one gap
 			for (int x = 2; x < MapWidth - 2; x++)
 			{
 				if (x == MapWidth / 2) continue; // gap
-				_map.SetBlocked(new OdiGame.World.GridPosition(x, 4), true);
+				_map.SetBlocked(new BotGame.World.GridPosition(x, 4), true);
 			}
 
 			_player = new PlayerActor(new GridPosition(2, 2));
 			var enemy = new ChaseEnemy(new GridPosition(MapWidth - 3, MapHeight - 3));
 
 			_actors = new List<Actor> { _player, enemy };
-			_ctx = new GameContext(_map, _actors);
+			_ctx = new GameContext(_map, _actors, Seed);
 
 			_renderer.BuildTiles(_map);
 			_renderer.RebuildActors(_actors);
@@ -45,7 +46,7 @@ namespace OdiGame.Core
 				(MapHeight * _renderer.TileSize) * 0.5f
 			);
 		}
-		
+
 		public override void _UnhandledInput(InputEvent e)
 		{
 			if (e is not InputEventKey k || !k.Pressed || k.Echo) return;
@@ -70,7 +71,7 @@ namespace OdiGame.Core
 			TryPlayerMove(move.Value);
 		}
 
-		private void TryPlayerMove(OdiGame.World.GridPosition delta)
+		private void TryPlayerMove(BotGame.World.GridPosition delta)
 		{
 			var target = _player.Position + delta;
 
@@ -100,7 +101,7 @@ namespace OdiGame.Core
 			_renderer.RebuildActors(_actors);
 		}
 
-private bool IsEnemyCollision(OdiGame.Core.Actor self)
+private bool IsEnemyCollision(BotGame.Core.Actor self)
 {
 	foreach (var a in _actors)
 	{
@@ -111,7 +112,7 @@ private bool IsEnemyCollision(OdiGame.Core.Actor self)
 	return false;
 }
 
-	private bool IsOccupied(OdiGame.World.GridPosition pos)
+	private bool IsOccupied(BotGame.World.GridPosition pos)
 {
 	foreach (var a in _actors)
 		if (a.Position.X == pos.X && a.Position.Y == pos.Y)
