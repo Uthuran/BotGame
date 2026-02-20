@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://botgame/schemas/items.schema.json",
+  "title": "Floor Items",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "type", "refId"],
+    "properties": {
+      "id": { "type": "string", "pattern": "^[a-z0-9_\\-]+$" },
+      "type": { "type": "string", "enum": ["Part", "Consumable", "KeyItem"] },
+      "refId": { "type": "string" },
+      "stack": { "type": "integer", "minimum": 1, "default": 1 }
+    }
+  }
+}
