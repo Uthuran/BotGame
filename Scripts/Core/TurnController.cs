@@ -12,7 +12,7 @@ namespace BotGame.Core
 		[Export] public int MapHeight = 8;
 		[Export] public int Seed = 0;
 
-		private GridWorld _map = default!;
+		private BotGame.World.GridWorld _map = default!;
 		private GameContext _ctx = default!;
 		private PlayerActor _player = default!;
 		private List<Actor> _actors = default!;
@@ -22,17 +22,12 @@ namespace BotGame.Core
 		{
 			_renderer = GetParent().GetNode<BoardRenderer>("BoardRenderer");
 
-			_map = new GridWorld(MapWidth, MapHeight);
-
-			// Build a horizontal wall strip with one center gap when the map is large enough.
-			if (MapWidth >= 5 && MapHeight > 0)
+			_map = new BotGame.World.GridWorld(MapWidth, MapHeight);
+			// Simple wall strip with one gap
+			for (int x = 2; x < MapWidth - 2; x++)
 			{
-				var wallY = Mathf.Clamp(MapHeight / 2, 0, MapHeight - 1);
-				for (int x = 2; x < MapWidth - 2; x++)
-				{
-					if (x == MapWidth / 2) continue;
-					_map.SetBlocked(new GridPosition(x, wallY), true);
-				}
+				if (x == MapWidth / 2) continue; // gap
+				_map.SetBlocked(new BotGame.World.GridPosition(x, 4), true);
 			}
 
 			_player = new PlayerActor(new GridPosition(2, 2));
@@ -76,7 +71,7 @@ namespace BotGame.Core
 			TryPlayerMove(move.Value);
 		}
 
-		private void TryPlayerMove(GridPosition delta)
+		private void TryPlayerMove(BotGame.World.GridPosition delta)
 		{
 			var target = _player.Position + delta;
 
@@ -106,15 +101,25 @@ namespace BotGame.Core
 			_renderer.RebuildActors(_actors);
 		}
 
-		private bool IsEnemyCollision(Actor self)
-		{
-			foreach (var a in _actors)
-			{
-				if (a == self) continue;
-				if (a.Position.X == self.Position.X && a.Position.Y == self.Position.Y)
-					return true;
-			}
-			return false;
-		}
+private bool IsEnemyCollision(BotGame.Core.Actor self)
+{
+	foreach (var a in _actors)
+	{
+		if (a == self) continue;
+		if (a.Position.X == self.Position.X && a.Position.Y == self.Position.Y)
+			return true;
+	}
+	return false;
+}
+
+	private bool IsOccupied(BotGame.World.GridPosition pos)
+{
+	foreach (var a in _actors)
+		if (a.Position.X == pos.X && a.Position.Y == pos.Y)
+			return true;
+
+	return false;
+}
+
 	}
 }

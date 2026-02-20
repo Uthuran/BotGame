@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using OdiGame.World;
+using BotGame.World;
 
 namespace BotGame.Core
 {
