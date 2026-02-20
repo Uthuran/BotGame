@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using OdiGame.World;
 
-namespace OdiGame.Core
+namespace BotGame.Core
 {
 	public class GameContext
 	{

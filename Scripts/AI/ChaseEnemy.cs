@@ -1,8 +1,8 @@
 using System.Linq;
-using OdiGame.Core;
-using OdiGame.World;
+using BotGame.Core;
+using BotGame.World;
 
-namespace OdiGame.AI
+namespace BotGame.AI
 {
 	public class ChaseEnemy : Actor
 	{

@@ -1,10 +1,10 @@
 using Godot;
 using System.Collections.Generic;
-using OdiGame.AI;
-using OdiGame.UI;
-using OdiGame.World;
+using BotGame.AI;
+using BotGame.UI;
+using BotGame.World;
 
-namespace OdiGame.Core
+namespace BotGame.Core
 {
 	public partial class TurnController : Node
 	{
@@ -12,7 +12,7 @@ namespace OdiGame.Core
 		[Export] public int MapHeight = 8;
 		[Export] public int Seed = 0;
 
-		private OdiGame.World.GridWorld _map = default!;
+		private GridWorld _map = default!;
 		private GameContext _ctx = default!;
 		private PlayerActor _player = default!;
 		private List<Actor> _actors = default!;
@@ -22,12 +22,17 @@ namespace OdiGame.Core
 		{
 			_renderer = GetParent().GetNode<BoardRenderer>("BoardRenderer");
 
-			_map = new OdiGame.World.GridWorld(MapWidth, MapHeight);
-			// Simple wall strip with one gap
-			for (int x = 2; x < MapWidth - 2; x++)
+			_map = new GridWorld(MapWidth, MapHeight);
+
+			// Build a horizontal wall strip with one center gap when the map is large enough.
+			if (MapWidth >= 5 && MapHeight > 0)
 			{
-				if (x == MapWidth / 2) continue; // gap
-				_map.SetBlocked(new OdiGame.World.GridPosition(x, 4), true);
+				var wallY = Mathf.Clamp(MapHeight / 2, 0, MapHeight - 1);
+				for (int x = 2; x < MapWidth - 2; x++)
+				{
+					if (x == MapWidth / 2) continue;
+					_map.SetBlocked(new GridPosition(x, wallY), true);
+				}
 			}
 
 			_player = new PlayerActor(new GridPosition(2, 2));
@@ -60,9 +65,9 @@ namespace OdiGame.Core
 			GridPosition? move = k.Keycode switch
 			{
 				Key.W or Key.Up => new GridPosition(0, -1),
-				Key.S or Key.Down => new GridPosition(0,  1),
+				Key.S or Key.Down => new GridPosition(0, 1),
 				Key.A or Key.Left => new GridPosition(-1, 0),
-				Key.D or Key.Right => new GridPosition( 1, 0),
+				Key.D or Key.Right => new GridPosition(1, 0),
 				_ => null
 			};
 
@@ -71,7 +76,7 @@ namespace OdiGame.Core
 			TryPlayerMove(move.Value);
 		}
 
-		private void TryPlayerMove(OdiGame.World.GridPosition delta)
+		private void TryPlayerMove(GridPosition delta)
 		{
 			var target = _player.Position + delta;
 
@@ -101,25 +106,15 @@ namespace OdiGame.Core
 			_renderer.RebuildActors(_actors);
 		}
 
-private bool IsEnemyCollision(OdiGame.Core.Actor self)
-{
-	foreach (var a in _actors)
-	{
-		if (a == self) continue;
-		if (a.Position.X == self.Position.X && a.Position.Y == self.Position.Y)
-			return true;
-	}
-	return false;
-}
-
-	private bool IsOccupied(OdiGame.World.GridPosition pos)
-{
-	foreach (var a in _actors)
-		if (a.Position.X == pos.X && a.Position.Y == pos.Y)
-			return true;
-
-	return false;
-}
-
+		private bool IsEnemyCollision(Actor self)
+		{
+			foreach (var a in _actors)
+			{
+				if (a == self) continue;
+				if (a.Position.X == self.Position.X && a.Position.Y == self.Position.Y)
+					return true;
+			}
+			return false;
+		}
 	}
 }

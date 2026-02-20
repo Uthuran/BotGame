@@ -1,0 +1,39 @@
+[
+  {
+    "id": "cpu_basic_mk1",
+    "name": "Basic CPU Mk1",
+    "slot": "CPU",
+    "tier": 1,
+    "stats": { "sight": 6, "maxHp": 10 }
+  },
+  {
+    "id": "core_compact_mk1",
+    "name": "Compact Core Mk1",
+    "slot": "Power",
+    "tier": 1,
+    "stats": { "energyPerTurn": 10, "heatDissipation": 2 }
+  },
+  {
+    "id": "legs_treads_mk1",
+    "name": "Tread Legs Mk1",
+    "slot": "Move",
+    "tier": 1,
+    "stats": { "moveCost": 1.0, "maxHp": 14 }
+  },
+  {
+    "id": "weapon_laser_dual",
+    "name": "Dual Laser",
+    "slot": "Arm",
+    "tier": 2,
+    "size": 2,
+    "tags": ["weapon", "energy"],
+    "stats": { "damage": 8, "range": 5, "accuracy": 0.82, "heatDissipation": -1 }
+  },
+  {
+    "id": "module_radar_mk1",
+    "name": "Radar Module Mk1",
+    "slot": "Module",
+    "tier": 1,
+    "stats": { "sight": 2 }
+  }
+]
