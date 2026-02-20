@@ -1,16 +1,19 @@
 using System.Collections.Generic;
+using OdiGame.World;
 
 namespace BotGame.Core
 {
 	public class GameContext
 	{
-		public BotGame.World.GridWorld Map { get; }
+		public GridWorld Map { get; }
 		public List<Actor> Actors { get; }
+		public int Seed { get; }
 
-		public GameContext(BotGame.World.GridWorld map, List<Actor> actors)
+		public GameContext(GridWorld map, List<Actor> actors, int seed = 0)
 		{
 			Map = map;
 			Actors = actors;
+			Seed = seed;
 		}
 	}
 }

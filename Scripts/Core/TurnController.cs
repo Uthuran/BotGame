@@ -10,6 +10,7 @@ namespace BotGame.Core
 	{
 		[Export] public int MapWidth = 12;
 		[Export] public int MapHeight = 8;
+		[Export] public int Seed = 0;
 
 		private GridWorld _map = default!;
 		private GameContext _ctx = default!;
@@ -38,7 +39,7 @@ namespace BotGame.Core
 			var enemy = new ChaseEnemy(new GridPosition(MapWidth - 3, MapHeight - 3));
 
 			_actors = new List<Actor> { _player, enemy };
-			_ctx = new GameContext(_map, _actors);
+			_ctx = new GameContext(_map, _actors, Seed);
 
 			_renderer.BuildTiles(_map);
 			_renderer.RebuildActors(_actors);
