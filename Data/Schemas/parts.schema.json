@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://botgame/schemas/parts.schema.json",
+  "title": "Parts Catalog",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["id", "name", "slot", "tier", "stats"],
+    "properties": {
+      "id": { "type": "string", "pattern": "^[a-z0-9_\\-]+$" },
+      "name": { "type": "string", "minLength": 1 },
+      "slot": {
+        "type": "string",
+        "enum": ["CPU", "Power", "Move", "Arm", "Module"]
+      },
+      "tier": { "type": "integer", "minimum": 1, "maximum": 10 },
+      "size": { "type": "integer", "minimum": 1, "maximum": 2, "default": 1 },
+      "tags": {
+        "type": "array",
+        "items": { "type": "string" },
+        "uniqueItems": true
+      },
+      "stats": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "maxHp": { "type": "number" },
+          "sight": { "type": "number" },
+          "energyPerTurn": { "type": "number" },
+          "heatDissipation": { "type": "number" },
+          "moveCost": { "type": "number" },
+          "damage": { "type": "number" },
+          "range": { "type": "integer", "minimum": 1 },
+          "accuracy": { "type": "number" }
+        }
+      }
+    },
+    "allOf": [
+      {
+        "if": {
+          "properties": { "slot": { "const": "Arm" } },
+          "required": ["slot"]
+        },
+        "then": {
+          "properties": {
+            "size": { "enum": [1, 2] }
+          }
+        }
+      }
+    ]
+  }
+}

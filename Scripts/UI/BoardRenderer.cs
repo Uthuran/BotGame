@@ -1,9 +1,9 @@
 using Godot;
 using System.Collections.Generic;
-using OdiGame.Core;
-using OdiGame.World;
+using BotGame.Core;
+using BotGame.World;
 
-namespace OdiGame.UI
+namespace BotGame.UI
 {
 	public partial class BoardRenderer : Node2D
 	{
@@ -32,7 +32,7 @@ namespace OdiGame.UI
 			GD.Print($"[BoardRenderer READY] EnemyBotScene={(EnemyBotScene?.ResourcePath ?? "NULL")}");
 		}
 
-		public void BuildTiles(OdiGame.World.GridWorld map)
+		public void BuildTiles(BotGame.World.GridWorld map)
 		{
 			foreach (var t in _tiles) t.QueueFree();
 			_tiles.Clear();

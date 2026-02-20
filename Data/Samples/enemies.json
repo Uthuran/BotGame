@@ -1,0 +1,16 @@
+[
+  {
+    "id": "scout_bot",
+    "name": "Scout Bot",
+    "ai": "Chase",
+    "salvageDropRate": 0.45,
+    "loadout": {
+      "CPU": "cpu_basic_mk1",
+      "Power": "core_compact_mk1",
+      "Move": "legs_treads_mk1",
+      "ArmL": "weapon_laser_dual",
+      "ArmR": null,
+      "Modules": ["module_radar_mk1"]
+    }
+  }
+]
